@@ -5,6 +5,16 @@ provider "aws" {
   region = "us-west-2"
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "my-terraform-backend-jenkins"
+    key            = "env/dev/terraform.tfstate"
+    region         = "us-west-2"
+    dynamodb_table = "terraform-lock-table"
+    encrypt        = true
+  }
+}
+
 #########################################
 # Get Default VPC & Subnets
 #########################################
