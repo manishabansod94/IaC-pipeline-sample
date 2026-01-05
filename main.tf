@@ -126,5 +126,5 @@ output "instance_dns" {
 }
 
 output "keyname" {
-  value = aws_key_pair.app0012-key-r.key_name
+  value = aws_key_pair.app001-key-r.key_name
 }
