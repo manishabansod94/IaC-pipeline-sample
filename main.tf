@@ -41,7 +41,7 @@ resource "aws_key_pair" "app001-key-r" {
 # Security Group
 #########################################
 resource "aws_security_group" "allow_all" {
-  name        = "allow_all_traffic"
+  name        = "mani-sg"
   description = "Allow all inbound and outbound traffic"
   vpc_id      = data.aws_vpc.default.id
 
@@ -70,7 +70,7 @@ variable "server_count" {
 #########################################
 # EC2 Instance + Password Login Enable
 #########################################
-resource "aws_instance" "APP001-WEB" {
+resource "aws_instance" "APP0012-WEB" {
   count         = var.server_count
   ami           = "ami-03c1f788292172a4e" # Ubuntu 22.04 LTS
   instance_type = "t3.micro"
@@ -110,21 +110,21 @@ EOF
 # Outputs
 #########################################
 output "instance_names" {
-  value = [for i in aws_instance.APP001-WEB : i.tags["Name"]]
+  value = [for i in aws_instance.APP0012-WEB : i.tags["Name"]]
 }
 
 output "instance_ids" {
-  value = [for i in aws_instance.APP001-WEB : i.id]
+  value = [for i in aws_instance.APP0012-WEB : i.id]
 }
 
 output "instance_ips" {
-  value = [for i in aws_instance.APP001-WEB : i.public_ip]
+  value = [for i in aws_instance.APP0012-WEB : i.public_ip]
 }
 
 output "instance_dns" {
-  value = [for i in aws_instance.APP001-WEB : i.public_dns]
+  value = [for i in aws_instance.APP0012-WEB : i.public_dns]
 }
 
 output "keyname" {
-  value = aws_key_pair.app001-key-r.key_name
+  value = aws_key_pair.app0012-key-r.key_name
 }
